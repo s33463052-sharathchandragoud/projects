@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Portal</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- FIXED FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body class="bg-gray-100 font-sans text-gray-800">
+
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="min-h-screen flex items-center justify-center p-4">
+<div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+
+<div class="text-center mb-8">
+<i class="fas fa-university text-4xl text-indigo-600 mb-2"></i>
+<h1 class="text-2xl font-bold">Registration Portal</h1>
+<p class="text-gray-500">Enter your student credentials</p>
+</div>
+
+<form onsubmit="event.preventDefault(); showPortal();" class="space-y-4">
+
+<input type="text" placeholder="Student ID"
+class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" required>
+
+<input type="password" placeholder="Password"
+class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" required>
+
+<button type="submit"
+class="w-full bg-indigo-600 text-white p-3 rounded-lg font-bold hover:bg-indigo-700 transition">
+Sign In
+</button>
+
+</form>
+</div>
+</div>
+
+<!-- MAIN PORTAL -->
+<div id="mainPortal" class="hidden">
+
+<nav class="bg-indigo-700 text-white p-4 shadow-md">
+<div class="max-w-6xl mx-auto flex justify-between items-center">
+
+<h1 class="font-bold border-b-2 border-indigo-400">Registration Portal</h1>
+
+<button onclick="location.reload()"
+class="text-sm opacity-80 hover:opacity-100 underline">
+Logout
+</button>
+
+</div>
+</nav>
+
+<main class="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+<!-- SIDEBAR -->
+<div class="space-y-6">
+
+<div class="bg-white p-5 rounded-xl shadow-sm border">
+<h2 class="font-bold text-gray-500 uppercase text-xs mb-3">Student Information</h2>
+
+<p class="text-lg font-bold">Student</p>
+<p class="text-indigo-600 font-medium">First Year Student</p>
+<p class="text-sm mt-2 text-gray-500 font-mono">GPA: 8.0 / 10.0</p>
+</div>
+
+<div class="bg-white p-5 rounded-xl shadow-sm border">
+
+<div class="flex justify-between items-center mb-3">
+<h2 class="font-bold text-gray-500 uppercase text-xs">My Schedule</h2>
+
+<span id="creditCounter"
+class="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded">
+0 / 12 Credits
+</span>
+
+</div>
+
+<div id="scheduleList" class="space-y-3">
+<p class="text-xs text-gray-400 italic">No courses registered yet.</p>
+</div>
+
+</div>
+</div>
+
+<!-- COURSE TABLE -->
+<div class="md:col-span-2 bg-white rounded-xl shadow-sm border overflow-hidden">
+
+<div class="p-4 bg-gray-50 border-b flex justify-between">
+<h3 class="font-bold">Courses</h3>
+<span class="text-xs text-green-600 font-bold uppercase tracking-wider">
+Registration Open
+</span>
+</div>
+
+<table class="w-full text-left">
+
+<thead class="text-xs text-gray-400 border-b">
+<tr>
+<th class="p-4 uppercase">Course</th>
+<th class="p-4 uppercase text-center">Section</th>
+<th class="p-4 uppercase text-center">Seats</th>
+<th class="p-4 uppercase text-center">Action</th>
+</tr>
+</thead>
+
+<tbody class="divide-y">
+
+<!-- CS102 -->
+<tr id="row-CS102">
+
+<td class="p-4">
+<div class="font-bold text-indigo-900">
+CS102 <span class="text-[10px] bg-gray-100 px-1 rounded ml-1">4 CR</span>
+</div>
+<div class="text-xs text-gray-500">Intro to Programming</div>
+</td>
+
+<td class="p-4 text-center">
+<select id="select-CS102" class="text-sm border rounded-md p-1 bg-gray-50 outline-none">
+<option>Sec A</option>
+<option>Sec B</option>
+<option>Sec C</option>
+<option>Sec D</option>
+</select>
+</td>
+
+<td class="p-4 text-green-600 font-bold text-center">40 / 40</td>
+
+<td id="action-CS102" class="p-4 text-center">
+<button onclick="registerCourse('CS102',4)"
+class="bg-indigo-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-bold hover:bg-indigo-600 hover:text-white transition">
+Register
+</button>
+</td>
+
+</tr>
+
+<!-- MA102 -->
+<tr id="row-MA102">
+
+<td class="p-4">
+<div class="font-bold text-indigo-900">
+MA102 <span class="text-[10px] bg-gray-100 px-1 rounded ml-1">4 CR</span>
+</div>
+<div class="text-xs text-gray-400">Calculus I</div>
+</td>
+
+<td class="p-4 text-center">
+<select id="select-MA102" class="text-sm border rounded-md p-1 bg-gray-50 outline-none">
+<option>Sec A</option>
+<option>Sec B</option>
+<option>Sec C</option>
+<option>Sec D</option>
+</select>
+</td>
+
+<td class="p-4 text-green-600 font-bold text-center">40 / 40</td>
+
+<td id="action-MA102" class="p-4 text-center">
+<button onclick="registerCourse('MA102',4)"
+class="bg-indigo-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-bold hover:bg-indigo-600 hover:text-white transition">
+Register
+</button>
+</td>
+
+</tr>
+
+<!-- DE102 -->
+<tr id="row-DE102">
+
+<td class="p-4">
+<div class="font-bold text-indigo-900">
+DE102 <span class="text-[10px] bg-gray-100 px-1 rounded ml-1">4 CR</span>
+</div>
+<div class="text-xs text-gray-400">Design Thinking</div>
+</td>
+
+<td class="p-4 text-center">
+<select id="select-DE102" class="text-sm border rounded-md p-1 bg-gray-50 outline-none">
+<option>Sec A</option>
+<option>Sec B</option>
+<option>Sec C</option>
+<option>Sec D</option>
+</select>
+</td>
+
+<td class="p-4 text-green-600 font-bold text-center">40 / 40</td>
+
+<td id="action-DE102" class="p-4 text-center">
+<button onclick="registerCourse('DE102',4)"
+class="bg-indigo-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-bold hover:bg-indigo-600 hover:text-white transition">
+Register
+</button>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+</div>
+</main>
+</div>
+
+<script>
+
+const MAX_CREDITS = 12;
+let currentCredits = 0;
+
+function showPortal(){
+document.getElementById("loginPage").classList.add("hidden");
+document.getElementById("mainPortal").classList.remove("hidden");
+}
+
+function registerCourse(courseCode,credits){
+
+if(currentCredits+credits>MAX_CREDITS){
+alert("Cannot exceed 12 credits!");
+return;
+}
+
+const selectEl=document.getElementById(`select-${courseCode}`);
+const actionEl=document.getElementById(`action-${courseCode}`);
+const rowEl=document.getElementById(`row-${courseCode}`);
+
+const seatCell=rowEl.children[2];
+
+let seatText=seatCell.innerText.trim();
+
+let parts=seatText.split("/");
+
+let seats=parseInt(parts[0].trim());
+let total=parseInt(parts[1].trim());
+
+if(seats===0){
+alert("No seats available!");
+return;
+}
+
+seats--;
+
+seatCell.innerText=`${seats} / ${total}`;
+
+const selectedSection=selectEl.value;
+
+currentCredits+=credits;
+
+document.getElementById("creditCounter").innerText=
+`${currentCredits} / ${MAX_CREDITS} Credits`;
+
+selectEl.disabled=true;
+
+rowEl.classList.add("bg-green-50");
+
+actionEl.innerHTML=
+`<span class="text-green-600 font-bold text-sm flex items-center justify-center">
+<i class="fas fa-check-circle mr-1"></i> Registered
+</span>`;
+
+const scheduleList=document.getElementById("scheduleList");
+
+if(currentCredits===credits)
+scheduleList.innerHTML="";
+
+const courseName=rowEl.querySelector(".text-xs").innerText;
+
+const card=document.createElement("div");
+
+card.className=
+"p-3 bg-indigo-50 border border-indigo-100 rounded-lg flex justify-between items-center";
+
+card.innerHTML=`
+<div>
+<div class="font-bold text-indigo-900">${courseCode}</div>
+<div class="text-[10px] text-indigo-500 uppercase">${selectedSection} — ${courseName}</div>
+</div>
+<i class="fas fa-check text-indigo-400 text-xs"></i>
+`;
+
+scheduleList.appendChild(card);
+}
+
+</script>
+
+</body>
+</html>
