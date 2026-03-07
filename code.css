@@ -1,0 +1,15 @@
+/* Custom Styles */
+
+body{
+font-family: Segoe UI, sans-serif;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+select:disabled{
+background:#eee;
+cursor:not-allowed;
+}
